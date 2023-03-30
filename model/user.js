@@ -9,7 +9,16 @@ const UserSchema = new Schema({
     email:{
         type:String,
         required:[true,"email required"]
+    },
+    password:{
+        type:String,
+        required:[true,"password required"]
+    },
+    license_plate:{
+        type:String,
+        required:[true,"license_plate required"]
     }
+
 });
 
 const User = mongoose.model('users',UserSchema)
