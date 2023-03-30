@@ -5,6 +5,7 @@ const variables = require("./config/variables")
 const mongoose = require('./config/mongoose')
 const PORT = process.env.PORT
 
+app.use(express.json())
 app.use(userRouter)
 
 

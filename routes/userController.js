@@ -3,7 +3,7 @@ const router = express.Router();
 const userService = require("../services/userServices")
 const User = require('../model/user');
 
-router.use(express.json())
+
 // const helloMiddleware = (req,res,next)=>{
 //     console.log("hello")
 // }
@@ -26,13 +26,13 @@ router.get('/users', async (req, res) => {
 });
 
 
-router.post("/login",async (req,res)=>{
+router.post("/user/login",async (req,res)=>{
     try {
-        let  users = await userService.login(req);
+        let users = await userService.login(req);
         res.json(users)
+        // res.end('{"success" : "Updated Successfully", "status" : 200}');
       } catch (error) {
-        res.json({
-            error: {
+        res.json({error: {
               status: statusCode,
               message: error.message
             }
@@ -40,6 +40,25 @@ router.post("/login",async (req,res)=>{
       }
     // let  users = await userService.login(req);
     // res.send(users)
+})
+
+router.post('/users/create', async(req, res) => {
+  try {
+    const result = await userService.createUser(req)
+    if('success' == result){
+      var response = {
+        status  : 200,
+        success : 'Create User Success'}
+        res.json(response)
+    }
+
+  } catch (error) {
+    res.json({ error: {
+        status: statusCode,
+        message: error.message
+      }
+  });
+  }
 })
 
 router.get("/users/:userid",(req,res)=>{
