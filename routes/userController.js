@@ -54,7 +54,7 @@ router.post('/users/create', async(req, res) => {
 
   } catch (error) {
     res.json({ error: {
-        status: statusCode,
+        status: 500,
         message: error.message
       }
   });

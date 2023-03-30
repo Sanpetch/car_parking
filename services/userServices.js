@@ -17,6 +17,9 @@ const Users = {
         var userDetails = new User({
             name: req.body.name,
             email: req.body.email,
+            license_plate:req.body.license_plate,
+            password:req.body.password
+
           });
 
          await userDetails.save()
