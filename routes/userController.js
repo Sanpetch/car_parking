@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userService = require("../services/userServices")
-const User = require('../model/user');
+
 
 
 // const helloMiddleware = (req,res,next)=>{
@@ -18,7 +18,7 @@ router.get('/users', async (req, res) => {
       } catch (error) {
         res.json({
             error: {
-              status: statusCode,
+              status: 500,
               message: error.message
             }
         });
@@ -33,7 +33,7 @@ router.post("/user/login",async (req,res)=>{
         // res.end('{"success" : "Updated Successfully", "status" : 200}');
       } catch (error) {
         res.json({error: {
-              status: statusCode,
+              status: 500,
               message: error.message
             }
         });
@@ -42,7 +42,7 @@ router.post("/user/login",async (req,res)=>{
     // res.send(users)
 })
 
-router.post('/users/create', async(req, res) => {
+router.post('/user/create', async(req, res) => {
   try {
     const result = await userService.createUser(req)
     if('success' == result){
