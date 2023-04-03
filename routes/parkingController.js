@@ -21,11 +21,10 @@ router.get('/parkingLots', async (req, res) => {
 });
 
 
-router.post("/user/login",async (req,res)=>{
+router.put("/parkingLots/:id",async (req,res)=>{
     try {
-        let users = await userService.login(req);
-        res.json(users)
-        // res.end('{"success" : "Updated Successfully", "status" : 200}');
+        let parkingLots = await parkingLotService.updateParkingLot(req)
+        res.end('{"success" : "Updated parking lot Successfully", "status" : 200}');
       } catch (error) {
         res.json({error: {
               status: 500,
@@ -33,8 +32,7 @@ router.post("/user/login",async (req,res)=>{
             }
         });
       }
-    // let  users = await userService.login(req);
-    // res.send(users)
+    
 })
 
 module.exports = router;

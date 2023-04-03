@@ -3,9 +3,21 @@ const User = require('../model/user');
 const Users = {
 
 
-    async findAll(req){
+    async findAll(req,res,next){
         const users = await User.find({});
         return users;
+
+        // await User.find({}).then(users=>{
+        //     console.log(users);
+        //     return users;
+        // }).catch(err=>{
+        //     next(err);
+        // })
+
+        // await User.find({},(err,users)=>{
+        //     if(err) return next(err);
+        //     return users;
+        // })
     },
 
     async login(req){

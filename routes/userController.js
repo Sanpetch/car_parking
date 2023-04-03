@@ -14,6 +14,7 @@ const userService = require("../services/userServices")
 router.get('/users', async (req, res) => {
     try {
         let  users = await userService.findAll(req);
+        console.log("asdfasdf"+users)
         res.json(users)
       } catch (error) {
         res.json({
