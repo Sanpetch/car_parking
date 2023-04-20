@@ -14,7 +14,6 @@ const userService = require("../services/userServices")
 router.get('/users', async (req, res) => {
     try {
         let  users = await userService.findAll(req);
-        console.log("asdfasdf"+users)
         res.json(users)
       } catch (error) {
         res.json({
@@ -30,7 +29,26 @@ router.get('/users', async (req, res) => {
 router.post("/user/login",async (req,res)=>{
     try {
         let users = await userService.login(req);
-        res.json(users)
+        console.log(users)
+        if(req.body.password == users.password){
+          var response = {
+            message : 'Login Success',
+            user:{
+              name : users.name,
+              license_plate : users.license_plate
+            }
+          }
+            console.log(response)
+            res.status(200).json(response)
+        }else{
+          var response = {
+            message : 'Unauthorized:Login Failed'}
+
+            console.log(response)
+            res.status(401).json(response)
+        
+        }
+        // res.json(users)
         // res.end('{"success" : "Updated Successfully", "status" : 200}');
       } catch (error) {
         res.json({error: {
@@ -49,13 +67,14 @@ router.post('/user/create', async(req, res) => {
     if('success' == result){
       var response = {
         status  : 200,
-        success : 'Create User Success'}
+        message : 'Create User Success'
+        
+      }
         res.json(response)
     }
 
   } catch (error) {
-    res.json({ error: {
-        status: 500,
+    res.status(500).json({ error: {
         message: error.message
       }
   });

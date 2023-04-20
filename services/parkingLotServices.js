@@ -10,6 +10,11 @@ const ParkingLotSerives = {
         return parkingLots;
     },
 
+    async findFirstAvailableSlot(req){
+        const parkingLots = await ParkingLot.findOne({is_available:true});
+        return parkingLots;
+    },
+
 
     async updateParkingLot(req,res){
         const parkingLots = await ParkingLot.findByIdAndUpdate(req.params.id,req.body)

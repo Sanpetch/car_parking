@@ -20,6 +20,21 @@ router.get('/parkingLots', async (req, res) => {
       }
 });
 
+router.get('/parkingLots/findFirstAvailable', async (req, res) => {
+  try {
+      let  parkingLots = await parkingLotService.findFirstAvailableSlot(req);
+      console.log(parkingLots)
+      res.json(parkingLots)
+    } catch (error) {
+      res.json({
+          error: {
+            status: 500,
+            message: error.message
+          }
+      });
+    }
+});
+
 
 router.put("/parkingLots/:id",async (req,res)=>{
     try {
