@@ -10,6 +10,10 @@ const ParkingLotSchema = new Schema({
         type:Boolean,
         required:[true,"is_available required"]
     },
+    license_plate:{
+        type:String,
+        required:[true,"license_plate required"]
+    },
    
 });
 

@@ -38,6 +38,7 @@ router.get('/parkingLots/findFirstAvailable', async (req, res) => {
 
 router.put("/parkingLots/:id",async (req,res)=>{
     try {
+      console.log(req.body)
         let parkingLots = await parkingLotService.updateParkingLot(req)
         res.end('{"success" : "Updated parking lot Successfully", "status" : 200}');
       } catch (error) {

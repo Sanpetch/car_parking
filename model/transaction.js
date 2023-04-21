@@ -9,6 +9,14 @@ const TransactionSchema = new Schema({
         type:String,
         required:[true,"license_plate required"]
     },
+    parking_no:{
+        type:String,
+        required:[true,"parking_no required"]
+    },
+    status:{
+        type:String,
+        required:[true,"status required"]
+    },
     created_date: {type: Date, default: dateThailand},
 },);
 

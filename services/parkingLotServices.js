@@ -19,9 +19,13 @@ const ParkingLotSerives = {
     async updateParkingLot(req,res){
         const parkingLots = await ParkingLot.findByIdAndUpdate(req.params.id,req.body)
         return parkingLots
+    },
+    
+    async updateParkingLotById(id,req){
+        const parkingLots = await ParkingLot.findByIdAndUpdate(id,req)
+       
+        return parkingLots
     }
-    
-    
 }
 
 
