@@ -35,10 +35,25 @@ router.get('/parkingLots/findFirstAvailable', async (req, res) => {
     }
 });
 
+router.get('/parkingLots/findSlotByLicensePlate/:id', async (req, res) => {
+  try {
+    console.log(req.params)
+      let  parkingLots = await parkingLotService.findSlotByLicensePlate(req);
+      console.log(parkingLots)
+      res.json(parkingLots)
+    } catch (error) {
+      res.json({
+          error: {
+            status: 500,
+            message: error.message
+          }
+      });
+    }
+});
+
 
 router.put("/parkingLots/:id",async (req,res)=>{
     try {
-      console.log(req.body)
         let parkingLots = await parkingLotService.updateParkingLot(req)
         res.end('{"success" : "Updated parking lot Successfully", "status" : 200}');
       } catch (error) {

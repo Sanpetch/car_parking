@@ -17,8 +17,13 @@ const TransactionSchema = new Schema({
         type:String,
         required:[true,"status required"]
     },
-    created_date: {type: Date, default: dateThailand},
-},);
+    created_date: {
+        type: Date,
+        default: dateThailand
+      }
+    
+});
+
 
 const Transaction = mongoose.model('transaction',TransactionSchema,'transaction')
 module.exports = Transaction;

@@ -15,6 +15,7 @@
 #include "esp32cam.h"
 #include "esp32cam/tinyml/edgeimpulse/FOMO.h"
 #define EEPROM_SIZE 12
+#define FLASH_GPIO_NUM 4
 DynamicJsonDocument doc(2048);
 using namespace Eloquent::Esp32cam;
 
@@ -23,9 +24,9 @@ TinyML::EdgeImpulse::FOMO fomo;
 
 String detectObject = "";
 String readObject = "";
-String serverName = "http://192.168.1.107:3000/transaction";
-const char* ssid = "matoo_2.4G";
-const char* password = "nickmatoo";
+String serverName = "http://172.20.10.4:3000/transaction/checkin";
+const char* ssid = "Nick";
+const char* password = "matoo123";
 
 void setup() {
     Serial.begin(115200);
@@ -39,6 +40,7 @@ void setup() {
 }
 
 void loop() {
+    pinMode(FLASH_GPIO_NUM, OUTPUT);
     if (!cam.capture()) {
         Serial.println(cam.getErrorMessage());
         delay(1000);
@@ -69,6 +71,7 @@ void loop() {
             Serial.print(" x ");
             Serial.print(bbox.height);
             Serial.println();
+          
         });
    
     if(detectObject == EEPROM.readString(1)){
@@ -79,7 +82,11 @@ void loop() {
        EEPROM.writeString(1,detectObject);
        EEPROM.commit();
        setPostRequest();
-       
+       delay(1000);
+       digitalWrite(FLASH_GPIO_NUM, HIGH);
+       delay(1000);
+       digitalWrite(FLASH_GPIO_NUM, LOW);
+       delay(1000);
      }
   }
     else {
@@ -96,6 +103,7 @@ void setPostRequest(){
       http.addHeader("Content-Type", "application/x-www-form-urlencoded");
       http.addHeader("Content-Type", "application/json");
       doc["license_plate"] = detectObject;
+      doc["status"] = "check_in";
       String json;
       serializeJson(doc, json);
       serializeJsonPretty(doc, Serial);

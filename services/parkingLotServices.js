@@ -15,6 +15,12 @@ const ParkingLotSerives = {
         return parkingLots;
     },
 
+    async findSlotByLicensePlate(req){
+        console.log(req.params.id)
+        const parkingLots = await ParkingLot.findOne({license_plate:req.params.id});
+        return parkingLots;
+    },
+
 
     async updateParkingLot(req,res){
         const parkingLots = await ParkingLot.findByIdAndUpdate(req.params.id,req.body)

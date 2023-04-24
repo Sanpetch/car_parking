@@ -3,18 +3,17 @@ const Transaction = require('../model/transaction');
 const Transactions = {
 
 
-    async createTransaction(req,parking_no){
+    async createTransaction(license_plate,parking_no,status){
         var transactionDetails = new Transaction({
-            license_plate: req.body.license_plate,
+            license_plate: license_plate,
             parking_no: parking_no,
-            status:req.body.status
+            status:status
           });
 
          await transactionDetails.save()
          return  "success"
    
-    }
-    
+    },
     
 }
 
